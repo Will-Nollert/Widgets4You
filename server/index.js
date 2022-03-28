@@ -3,11 +3,11 @@ import bodyParser from "body-parser";
 import cors from "cors";
 import mongoose from "mongoose";
 
-import sockRoutes from "./Routes/socks.js";
+import productRoutes from "./Routes/product.js";
 
 const app = express();
 
-app.use("/socks", sockRoutes);
+app.use("/product", productRoutes);
 
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
