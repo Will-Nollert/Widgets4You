@@ -26,17 +26,6 @@ const productSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  rating: {
-    type: Number,
-    required: true,
-    default: 0,
-  },
-  reviews: [reviewSchema],
-  numReviews: {
-    type: Number,
-    required: true,
-    default: 0,
-  },
   price: {
     type: Number,
     required: true,
@@ -49,5 +38,5 @@ const productSchema = mongoose.Schema({
   },
 });
 
-const productInfo = mongoose.model("productInfo", productSchema);
-export default productInfo;
+const ProductItem = mongoose.model("productItem", productSchema);
+export default ProductItem;
