@@ -3,7 +3,7 @@ import { TextField, Typography, Button, Paper } from "@material-ui/core";
 import useStyles from "./styles";
 import FileBase from "react-file-base64";
 import { useDispatch } from "react-redux";
-import { createProduct, updateProduct } from "../../actions/products";
+import { createPost, updatePost } from "../../actions/posts";
 import { useSelector } from "react-redux";
 
 const Form = ({ currentId, setCurrentId }) => {
@@ -31,9 +31,9 @@ const Form = ({ currentId, setCurrentId }) => {
     e.preventDefault();
 
     if (currentId) {
-      dispatch(updateProduct(currentId, productData));
+      dispatch(updatePost(currentId, productData));
     } else {
-      dispatch(createProduct(productData));
+      dispatch(createPost(productData));
     }
     clear();
   };
