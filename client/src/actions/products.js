@@ -17,12 +17,13 @@ export const getProducts = () => async (dispatch) => {
   }
 };
 
-export const createProduct = (Product) => async (dispatch) => {
+export const createProduct = (product) => async (dispatch) => {
   try {
-    const { data } = await api.createProduct(Product);
+    const { data } = await api.createProduct(product);
     dispatch({ type: CREATE, payload: data });
+    console.log(data);
   } catch (error) {
-    console.log(error);
+    console.log(error.response);
   }
 };
 

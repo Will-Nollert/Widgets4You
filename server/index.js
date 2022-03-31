@@ -3,7 +3,7 @@ import bodyParser from "body-parser";
 import cors from "cors";
 import mongoose from "mongoose";
 
-import productRoutes from "./Routes/product.js";
+import productRoutes from "./routes/product.js";
 
 const app = express();
 

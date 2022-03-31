@@ -3,12 +3,12 @@ import { TextField, Typography, Button, Paper } from "@material-ui/core";
 import useStyles from "./styles";
 import FileBase from "react-file-base64";
 import { useDispatch } from "react-redux";
-import { createProduct, updateProduct } from "../../actions/products";
+import { createProduct } from "../../actions/products";
 import { useSelector } from "react-redux";
+import { updateProduct } from "../../api";
 
 const Form = ({ currentId, setCurrentId }) => {
   const [productData, setProductData] = useState({
-    user: "",
     name: "",
     image: "",
     brand: "",
@@ -17,15 +17,15 @@ const Form = ({ currentId, setCurrentId }) => {
     price: "",
     countInStock: "",
   });
-  const post = useSelector((state) =>
-    currentId ? state.posts.find((p) => p._id === currentId) : null
+  const product = useSelector((state) =>
+    currentId ? state.products.find((p) => p._id === currentId) : null
   );
   const classes = useStyles();
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (post) setProductData(post);
-  }, [post]);
+    if (product) setProductData(product);
+  }, [product]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -35,13 +35,11 @@ const Form = ({ currentId, setCurrentId }) => {
     } else {
       dispatch(createProduct(productData));
     }
-    clear();
   };
 
   const clear = () => {
-    setCurrentId(null);
+    //setCurrentId(null);
     setProductData({
-      user: "",
       name: "",
       image: "",
       brand: "",
@@ -61,30 +59,42 @@ const Form = ({ currentId, setCurrentId }) => {
         onSubmit={handleSubmit}
       >
         <Typography variant="h6">
-          {currentId ? "Editing" : "Submit"} A Product
+          {currentId ? "Editing" : "Upload"} A Product
         </Typography>
         <TextField
-          name="creator"
+          name="productName"
           variant="outlined"
-          label="Creator"
+          label="Product Name"
           fullWidth
-          value={productData.user}
+          value={productData.name}
           onChange={(e) =>
             //spreads in the change that way the text field is not over written every time there is a submission
-            setProductData({ ...productData, user: e.target.value })
+            setProductData({ ...productData, name: e.target.value })
           }
         />
         <TextField
-          name="product_title"
+          name="price"
           variant="outlined"
-          label="Product_Title"
+          label="Price"
           fullWidth
-          value={productData.title}
+          value={productData.price}
           onChange={(e) =>
             //spreads in the change that way the text field is not over written every time there is a submission
-            setProductData({ ...productData, title: e.target.value })
+            setProductData({ ...productData, price: e.target.value })
           }
         />
+        <TextField
+          name="brand"
+          variant="outlined"
+          label="Brand"
+          fullWidth
+          value={productData.brand}
+          onChange={(e) =>
+            //spreads in the change that way the text field is not over written every time there is a submission
+            setProductData({ ...productData, brand: e.target.value })
+          }
+        />
+
         <TextField
           name="description"
           variant="outlined"
@@ -99,7 +109,7 @@ const Form = ({ currentId, setCurrentId }) => {
         <TextField
           name="category"
           variant="outlined"
-          label="category"
+          label="categories"
           fullWidth
           value={productData.category}
           onChange={(e) =>
