@@ -7,11 +7,10 @@ import productRoutes from "./Routes/product.js";
 
 const app = express();
 
-app.use("/product", productRoutes);
-
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
+app.use("/products", productRoutes);
 
 const CONNECTION_URL =
   "mongodb+srv://username:Password12345@cluster0.rdekl.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";

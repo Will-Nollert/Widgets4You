@@ -1,9 +1,10 @@
-import ProductItem from "../models/productItem.js";
+import productItem from "../models/productItem.js";
 
 export const getProduct = async (req, res) => {
   try {
-    const productItem = await ProductItem.find();
-    res.status(200).json(productItem);
+    const productItems = await productItem.find();
+    console.log(productItem);
+    res.status(200).json(productItems);
   } catch (error) {
     res.status(404).json({ message: error.message });
   }
@@ -12,7 +13,7 @@ export const getProduct = async (req, res) => {
 export const createProduct = async (req, res) => {
   const product = req.body;
 
-  const newProduct = new ProductItem(product);
+  const newProduct = new productItem(product);
 
   try {
     await newProduct.save();
