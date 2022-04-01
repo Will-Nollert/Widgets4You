@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import productItem from "../models/productItem.js";
 
 export const getProduct = async (req, res) => {
@@ -32,7 +33,7 @@ export const updateProduct = async (req, res) => {
   if (!mongoose.Types.ObjectId.isValid(req.params))
     return res.status(404).send("No post with that id");
 
-  const updatedPost = await postMessage.findByIdAndUpdate(
+  const updatedProduct = await productItem.findByIdAndUpdate(
     _id,
     { ...post, _id },
     {
@@ -40,16 +41,16 @@ export const updateProduct = async (req, res) => {
     }
   );
 
-  res.json(updatedPost);
+  res.json(updatedProduct);
 };
 
 export const deleteProduct = async (req, res) => {
   const { id } = req.params;
 
   if (!mongoose.Types.ObjectId.isValid(req.params))
-    return res.status(404).send("No post with that id");
+    return res.status(404).send("No product with that id");
 
-  await postMessage.findByIdAndRemove(id);
+  await productItem.findByIdAndRemove(id);
 
-  res.json({ message: "post deleted" });
+  res.json({ message: "product deleted" });
 };
