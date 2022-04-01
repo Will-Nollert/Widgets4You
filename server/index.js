@@ -1,23 +1,28 @@
 import express from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
+import dotenv from "dotenv";
 import mongoose from "mongoose";
 
 import productRoutes from "./routes/product.js";
 
 const app = express();
+dotenv.config();
 
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
+
 app.use("/products", productRoutes);
 
-const CONNECTION_URL =
-  "mongodb+srv://username:Password12345@cluster0.rdekl.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+app.get("/", (req, res) => {
+  res.send("Hello to This StoreFronts API");
+});
+
 const PORT = process.env.port || 5000;
 
 mongoose
-  .connect(CONNECTION_URL, {
+  .connect(process.env.CONNECTION_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
