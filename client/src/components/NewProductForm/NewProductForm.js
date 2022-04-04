@@ -109,7 +109,7 @@ const Form = ({ currentId, setCurrentId }) => {
         <TextField
           name="category"
           variant="outlined"
-          label="categories"
+          label="categories: 'Fitness,Formal,Sleep...'"
           fullWidth
           value={productData.category}
           onChange={(e) =>

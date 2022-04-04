@@ -28,15 +28,7 @@ const SingleProduct = ({ product, setCurrentId }) => {
       <div className={classes.overlay}>
         <Typography variant="h6">{product.name}</Typography>
       </div>
-      <div className={classes.overlay2}>
-        <Button
-          style={{ color: "black" }}
-          size="small"
-          onClick={() => setCurrentId(product._id)}
-        >
-          <MoreHorizIcon fontSize="medium" />
-        </Button>
-      </div>
+      <div className={classes.overlay2}></div>
       <div className={classes.details}>
         <Typography variant="body2" color="textSecondary">
           {product.category.map((category) => `#${category} `)}
@@ -56,6 +48,13 @@ const SingleProduct = ({ product, setCurrentId }) => {
         </Typography>
       </CardContent>
       <CardActions className={classes.cardActions}>
+        <Button
+          style={{ color: "black" }}
+          size="small"
+          onClick={() => setCurrentId(product._id)}
+        >
+          <MoreHorizIcon fontSize="medium" />
+        </Button>
         <Button
           size="small"
           color="primary"
