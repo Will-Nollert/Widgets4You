@@ -4,8 +4,13 @@ import { Toolbar } from "@material-ui/core";
 import useStyles from "./styles";
 import memories from "../../images/logo.png";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const Navbar = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const classes = useStyles();
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
 
@@ -13,7 +18,13 @@ const Navbar = () => {
     const token = user?.token;
 
     setUser(JSON.parse(localStorage.getItem("profile")));
-  }, []);
+  }, [location]);
+
+  const logOut = () => {
+    dispatch({ type: "LOGOUT" });
+    navigate("/");
+    setUser(null);
+  };
 
   return (
     <AppBar className={classes.appBar} position="static" color="inherit">
@@ -52,6 +63,7 @@ const Navbar = () => {
               variant="contained"
               className={classes.login}
               color="secondary"
+              onClick={logOut}
             >
               Logout
             </Button>
