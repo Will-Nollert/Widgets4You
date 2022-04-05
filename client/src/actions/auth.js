@@ -1,25 +1,24 @@
 import { AUTH } from "../consants/actionTypes.js";
 import * as api from "../api/index";
-import { useNavigate } from "react-router-dom";
 
-export const signin = (formData, history) => async (dispatch) => {
-  const navigate = useNavigate();
-
+export const signin = (formData, navigate) => async (dispatch) => {
   try {
-    // login the user and nav to home page
+    const { data } = await api.signIn(formData);
+
+    dispatch({ type: AUTH, data });
     navigate("/");
   } catch (error) {
     console.log(error);
   }
 };
 
-export const signup = (formData, history) => async (dispatch) => {
-  const navigate = useNavigate();
-
+export const signup = (formData, navigate) => async (dispatch) => {
   try {
-    // login the user and nav to home page
+    const { data } = await api.signUp(formData);
+
+    dispatch({ type: AUTH, data });
     navigate("/");
   } catch (error) {
-    console.log(error);
+    console.log(error.message);
   }
 };

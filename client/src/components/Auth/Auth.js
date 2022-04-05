@@ -40,7 +40,7 @@ const Auth = () => {
     if (isSignup) {
       dispatch(signup(formData, navigate));
     } else {
-      dispatch(signup(formData, navigate));
+      dispatch(signin(formData, navigate));
     }
   };
 
@@ -50,7 +50,7 @@ const Auth = () => {
 
   const switchMode = () => {
     setIsSignup((prevIsSignup) => !prevIsSignup);
-    handleShowPassword(false);
+    setShowPassword(false);
   };
 
   const googleSuccess = async (res) => {

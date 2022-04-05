@@ -1,7 +1,7 @@
-import bcrypt from "bcryptjs";
+import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
-import user from "../models/user";
+import user from "../models/user.js";
 
 export const signin = async (req, res) => {
   const { email, password } = req.body;
@@ -32,7 +32,7 @@ export const signin = async (req, res) => {
 };
 
 export const signup = async (req, res) => {
-  const { email, password, confirmPassword, firstname, lastname } = req.body;
+  const { email, password, confirmPassword, firstName, lastName } = req.body;
   try {
     const exsistingUser = await user.findOne({ email });
     if (exsistingUser)
@@ -46,7 +46,7 @@ export const signup = async (req, res) => {
     const result = await user.create({
       email,
       password: hashedPassword,
-      name: `${firstname} ${lastname}`,
+      name: `${firstName} ${lastName}`,
     });
 
     const token = jwt.sign(
