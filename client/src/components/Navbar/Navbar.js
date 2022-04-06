@@ -2,10 +2,11 @@ import React, { useState, useEffect } from "react";
 import { AppBar, Avatar, Typography, Button } from "@material-ui/core";
 import { Toolbar } from "@material-ui/core";
 import useStyles from "./styles";
-import memories from "../../images/logo.png";
+import logo from "../../images/logo.png";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useNavigate, useLocation } from "react-router-dom";
+import decode from "jwt-decode";
 
 const Navbar = () => {
   const location = useLocation();
@@ -17,10 +18,16 @@ const Navbar = () => {
   useEffect(() => {
     const token = user?.token;
 
+    if (token) {
+      const decodedToken = decode(token);
+
+      if (decodedToken.exp * 1000 < new Date().getTime()) logout();
+    }
+
     setUser(JSON.parse(localStorage.getItem("profile")));
   }, [location]);
 
-  const logOut = () => {
+  const logout = () => {
     dispatch({ type: "LOGOUT" });
     navigate("/");
     setUser(null);
@@ -36,11 +43,11 @@ const Navbar = () => {
           variant="h2"
           align="center"
         >
-          Race Report
+          Widgets4you
         </Typography>
         <img
           className={classes.image}
-          src={memories}
+          src={logo}
           alt="memories"
           height={60}
           width={60}
@@ -63,7 +70,7 @@ const Navbar = () => {
               variant="contained"
               className={classes.login}
               color="secondary"
-              onClick={logOut}
+              onClick={logout}
             >
               Logout
             </Button>
