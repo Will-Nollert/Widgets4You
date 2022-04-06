@@ -9,6 +9,9 @@ const productSchema = mongoose.Schema({
     type: String,
     // required: true,
   },
+  creator: {
+    type: String,
+  },
   brand: {
     type: String,
     //required: true,
@@ -22,6 +25,10 @@ const productSchema = mongoose.Schema({
     type: Number,
     // required: true,
     default: 0,
+  },
+  createdAt: {
+    type: Date,
+    default: new Date(),
   },
   countInStock: {
     type: Number,

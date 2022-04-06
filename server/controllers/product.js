@@ -14,7 +14,11 @@ export const getProduct = async (req, res) => {
 export const createProduct = async (req, res) => {
   const product = req.body;
 
-  const newProduct = new productItem(product);
+  const newProduct = new productItem({
+    ...product,
+    creator: req.userId,
+    createdAt: new Date().toISOString(),
+  });
 
   try {
     await newProduct.save();

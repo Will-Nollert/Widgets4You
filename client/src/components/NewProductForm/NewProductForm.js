@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 import { updateProduct } from "../../api";
 
 const Form = ({ currentId, setCurrentId }) => {
+  const user = JSON.parse(localStorage.getItem("profile"));
   const [productData, setProductData] = useState({
     name: "",
     image: "",
@@ -27,18 +28,35 @@ const Form = ({ currentId, setCurrentId }) => {
     if (product) setProductData(product);
   }, [product]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (currentId) {
-      dispatch(updateProduct(currentId, productData));
+    if (currentId === 0) {
+      dispatch(createProduct({ ...productData, creator: user?.result?.name }));
+      clear();
     } else {
-      dispatch(createProduct(productData));
+      dispatch(
+        updateProduct(currentId, {
+          ...productData,
+          creator: user?.result?.name,
+        })
+      );
+      clear();
     }
   };
 
+  if (!user?.result?.name) {
+    return (
+      <Paper className={classes.paper}>
+        <Typography variant="h6" align="center">
+          Sign in to Upload your Products!
+        </Typography>
+      </Paper>
+    );
+  }
+
   const clear = () => {
-    //setCurrentId(null);
+    setCurrentId(0);
     setProductData({
       name: "",
       image: "",
