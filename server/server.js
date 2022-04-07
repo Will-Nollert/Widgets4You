@@ -7,8 +7,8 @@ import path from "path";
 import { fileURLToPath } from "url";
 import { dirname } from "path";
 
-import { productRoutes } from "./routes/product.js";
-import { userRoutes } from "./routes/users.js";
+import product from "./routes/product.js";
+import user from "./routes/users.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -18,8 +18,8 @@ dotenv.config();
 const app = express();
 app.use(cors());
 
-app.use("/products", productRoutes);
-app.use("/user", userRoutes);
+app.use("/products", product);
+app.use("/user", user);
 
 app.get("/", (req, res) => {
   res.send("Hello to This StoreFronts API");
