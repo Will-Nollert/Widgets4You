@@ -35,8 +35,16 @@ mongoose
   )
   .catch((error) => console.log(error.message));
 
-app.use(bodyParser.json({ limit: "30mb", extended: true }));
-app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
+app.use(
+  bodyParser.json({ parameterLimit: 100000, limit: "50mb", extended: true })
+);
+app.use(
+  bodyParser.urlencoded({
+    parameterLimit: 100000,
+    limit: "50mb",
+    extended: true,
+  })
+);
 
 const PORT = process.env.PORT || 5000;
 
