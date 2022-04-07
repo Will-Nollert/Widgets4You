@@ -24,7 +24,6 @@
   },
   "homepage": "https://github.com/Will-Nollert/ecommerce-site-socks-#readme",
   "dependencies": {
-    "concurrently": "^7.1.0",
-    "nodemon": "^2.0.15"
+    "concurrently": "^7.1.0"
   }
 }
