@@ -4,8 +4,8 @@ import cors from "cors";
 import dotenv from "dotenv";
 import path from "path";
 
-import product from "./routes/product.js";
-import user from "./routes/users.js";
+import productRoutes from "./routes/product.js";
+import userRouter from "./routes/users.js";
 import connectDB from "./config/db.js";
 
 dotenv.config();
@@ -27,8 +27,8 @@ app.use(
   })
 );
 
-app.use("/products", product);
-app.use("/user", user);
+app.use("api/products", productRoutes);
+app.use("api/user", userRouter);
 
 const __dirname = path.resolve();
 if (process.env.NODE_ENV === "production") {
