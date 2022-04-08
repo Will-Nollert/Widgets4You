@@ -4,8 +4,6 @@ import cors from "cors";
 import dotenv from "dotenv";
 import connectDB from "./config/db.js";
 import path from "path";
-import { fileURLToPath } from "url";
-import { dirname } from "path";
 import productRoutes from "./Routes/product.js";
 import userRoutes from "./Routes/users.js";
 
@@ -30,8 +28,7 @@ app.use(
   })
 );
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+const __dirname = path.resolve();
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "/client/build")));
