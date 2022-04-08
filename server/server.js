@@ -2,20 +2,39 @@ import express from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
 import dotenv from "dotenv";
+import mongoose from "mongoose";
 import path from "path";
+import { fileURLToPath } from "url";
+import { dirname } from "path";
 
-import productRoutes from "./routes/product.js";
-import userRouter from "./routes/users.js";
-import connectDB from "./config/db.js";
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+import productRoutes from "./Routes/product.js";
+import userRoutes from "./Routes/users.js";
 
 dotenv.config();
 
-connectDB();
-
 const app = express();
-app.use(express.json());
-
 app.use(cors());
+
+app.use("/products", productRoutes);
+app.use("/user", userRoutes);
+
+app.get("/", (req, res) => {
+  res.send("Hello to This StoreFronts API");
+});
+
+mongoose
+  .connect(process.env.CONNECTION_URL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() =>
+    app.listen(PORT, () => console.log(`server running on port: ${PORT}`))
+  )
+  .catch((error) => console.log(error.message));
+
 app.use(
   bodyParser.json({ parameterLimit: 100000, limit: "50mb", extended: true })
 );
@@ -27,25 +46,10 @@ app.use(
   })
 );
 
-app.use("api/products", productRoutes);
-app.use("api/user", userRouter);
-
-const __dirname = path.resolve();
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "/client/build")));
-
-  app.get("*", (req, res) =>
-    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"))
-  );
-} else {
-  app.get("/", (req, res) => {
-    res.send("Hello to This StoreFronts API");
-  });
-}
-
 const PORT = process.env.PORT || 5000;
 
-app.listen(
-  PORT,
-  console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`)
-);
+app.use(express.static(path.resolve(__dirname, "./client/build")));
+// Step 2:
+app.get("*", function (request, response) {
+  response.sendFile(path.resolve(__dirname, "./client/build", "index.html"));
+});

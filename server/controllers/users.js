@@ -61,3 +61,13 @@ export const signup = async (req, res) => {
       .json({ message: "Something went wrong. please try again." });
   }
 };
+
+export const getUsers = async (req, res) => {
+  try {
+    const productItems = await user.find();
+    //console.log(productItem);
+    res.status(200).json(productItems);
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};
