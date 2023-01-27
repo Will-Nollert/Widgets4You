@@ -15,12 +15,15 @@ This project is a fullstack craigslist style message board/blog for which users 
 ## Screenshots
 
 - Landing Page 
+
 ![Screenshot 2023-01-27 at 16-54-16 React App](https://user-images.githubusercontent.com/90637390/215222188-89d9d6c8-af11-4802-b1ee-511a2e86b2f4.png)
 
 -Signup
+
 ![Screenshot 2023-01-27 at 16-54-46 React App](https://user-images.githubusercontent.com/90637390/215222246-18755fb7-fb00-43fa-93a3-e19dab2dac6d.png)
 
 -Product Listing
+
 ![Screenshot 2023-01-27 at 17-05-05 React App](https://user-images.githubusercontent.com/90637390/215222507-9c77e005-fea3-4261-a200-b538e9aa38bf.png)
 
 
